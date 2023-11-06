@@ -2,6 +2,7 @@ package zes.core.engine.windows;
 
 import java.nio.IntBuffer;
 
+import org.joml.Vector3f;
 import org.lwjgl.glfw.Callbacks;
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.glfw.GLFWVidMode;
@@ -26,6 +27,13 @@ public class Window {
 	
 	private boolean isResized;
 	private boolean isFullScreen;
+	
+	private Vector3f background = new Vector3f(0, 0, 0);
+	private int[] windowPosX = new int[1];
+	private int[] windowPosY = new int[1];
+	
+	private int frames;
+	private long time;
 	
 	public Window() {
 		this("Game", 1920, 1080);
@@ -136,11 +144,50 @@ public class Window {
 	}
 	
 	public void update() {
+		if (isResized) {
+			GL11.glViewport(0, 0, width, height);
+			isResized = false;
+		}
 		
+		GL11.glClearColor(background.x, background.y, background.z, 1.0f);
+		GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
+		
+		// Gets rid of the stuff from the previous frame
+		GLFW.glfwPollEvents();
+		
+		frames++;
+		
+		if (System.currentTimeMillis() > time + 1000) { 
+			GLFW.glfwSetWindowTitle(window, (title + " FPS: " + frames));
+			time = System.currentTimeMillis();
+			frames = 0;
+		}
 	}
 	
-	public void cleanup() {
+	public void setBackgroundColor(float r, float g, float b) {
+		background.set(r, b, b);
+	}
+	
+	public void destroy() {
+		keyInput.destroy();
+		mouseInput.destroy();
 		
+		GLFW.glfwWindowShouldClose(window);
+		GLFW.glfwDestroyWindow(window);
+		GLFW.glfwTerminate();
+	}
+	
+	public void setFullScreen(boolean isFullScreenIn) {
+		isFullScreen = isFullScreenIn;
+		isResized = true;
+		
+		if (isFullScreen) {
+			GLFW.glfwGetWindowPos(window, windowPosX, windowPosY);
+			GLFW.glfwSetWindowMonitor(window, GLFW.glfwGetPrimaryMonitor(), 0, 0, width, height, 0);
+		}
+		else {
+			GLFW.glfwSetWindowMonitor(window, 0, windowPosX[0], windowPosY[0], width, height, 0);
+		}
 	}
 
 }

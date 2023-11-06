@@ -1,5 +1,16 @@
 package zes.core.engine.textures;
 
+import java.nio.ByteBuffer;
+import java.nio.IntBuffer;
+import java.util.ArrayList;
+import java.util.Iterator;
+
+import org.lwjgl.BufferUtils;
+import org.lwjgl.glfw.GLFW;
+import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL46;
+import org.lwjgl.stb.STBImage;
+
 public class TextureSystem {
 	private ArrayList<GameTexture> registeredTextures = new ArrayList();
 	private GameTexture current = null;

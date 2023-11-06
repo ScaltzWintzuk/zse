@@ -11,6 +11,12 @@ public class Draw2DRectangle {
 		height = heightIn;
 	}
 	
+	public void draw() {
+		
+	}
+	
+	
+	
 	public int getXPos() { return xPos; }
 	public int getYPos() { return yPos; }
 	public int getWidth() { return width; }
