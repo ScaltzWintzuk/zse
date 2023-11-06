@@ -1,5 +1,7 @@
 package zes.core.engine.controls;
 
+import java.util.Arrays;
+
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.glfw.GLFWCursorPosCallback;
 import org.lwjgl.glfw.GLFWMouseButtonCallback;
@@ -23,10 +25,44 @@ public class MouseInput {
 				yPos = y;
 			}
 		};
+		
+		mouse = new GLFWMouseButtonCallback() {
+			@Override public void invoke(long window, int button, int action, int mods) {
+				buttons[button] = (action != GLFW.GLFW_RELEASE);
+				
+				if (isButtonPressed(0)) {
+					printStats();
+				}
+			}
+		};
+		
+		scroll = new GLFWScrollCallback() {
+			@Override public void invoke(long window, double offsetX, double offsetY) {
+				xScroll += offsetX;
+				yScroll += offsetY;
+			}
+		};
+	}
+	
+	public void printStats() {
+		System.out.printf("[%.2f, %.2f]\n", xPos, yPos);
+	}
+	
+	public static boolean isAnyButtonsPressed() {
+		for (int i = 0; i < buttons.length; i++) {
+			if (buttons[i]) { return true; }
+		}
+		return false;
 	}
 	
 	public static boolean isButtonPressed(int button) {
 		return buttons[button];
+	}
+	
+	public void destroy() {
+		cursor.free();
+		mouse.free();
+		scroll.free();
 	}
 	
 	// Getters
