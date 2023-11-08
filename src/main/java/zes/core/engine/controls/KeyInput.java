@@ -17,7 +17,7 @@ public class KeyInput {
 			@Override public void invoke(long window, int key, int scanCode, int action, int mods) {
 				keys[key] = (action != GLFW.GLFW_PRESS);
 				
-				System.out.printf("Key Pressed = [%d - %d]\n", key, action);
+				System.out.printf("Key Pressed = [Key:%d - Action: %d - Mods: %d]\n", key, action, mods);
 			}
 		};
 	}

@@ -56,6 +56,7 @@ public class Window {
 	public void init() {
 		keyInput = new KeyInput();
 		mouseInput = new MouseInput();
+		
 		if (!GLFW.glfwInit()) {
 			throw new IllegalStateException("Unable to initialize GLFW");
 		}
@@ -88,6 +89,7 @@ public class Window {
 		    GLFW.glfwSetWindowPos(window, vidMode.width() - pWidth.get(0) / 2, vidMode.height() - pHeight.get(0) / 2);
 		
 		}
+		
 		GLFW.glfwMakeContextCurrent(window);
 		
 		GLFW.glfwSwapInterval(1);
@@ -100,16 +102,18 @@ public class Window {
 	public void loop() {
 		GL.createCapabilities();
 		
-		GL11.glClearColor(1.0f, 0.0f, 0.0f, 0.0f);
+		setBackgroundColor(0, 0, 0);
 		
 		// Renders the window until the window is closed or ESCAPE is hit.
-		while (!GLFW.glfwWindowShouldClose(window)) {
+		while (!GLFW.glfwWindowShouldClose(window) && !KeyInput.isKeyPressed(GLFW.GLFW_KEY_ESCAPE)) {
 			GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
 			
 			GLFW.glfwSwapBuffers(window);
 			
 			GLFW.glfwPollEvents();
 		}
+		
+		destroy();
 	}
 	
 	public void initCallbacks() {
@@ -132,7 +136,6 @@ public class Window {
 		
 		// Window resize callbacks
 		GLFW.glfwSetWindowSizeCallback(window, sizeCallback);
-		
 	}
 	
 	public void close() {
@@ -165,7 +168,8 @@ public class Window {
 	}
 	
 	public void setBackgroundColor(float r, float g, float b) {
-		background.set(r, b, b);
+		GL11.glClearColor(r, g, b, 0.0f);
+		//background.set(r, b, b);
 	}
 	
 	public void destroy() {
