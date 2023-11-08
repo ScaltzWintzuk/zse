@@ -14,6 +14,7 @@ import org.lwjgl.system.MemoryUtil;
 
 import zes.core.engine.controls.KeyInput;
 import zes.core.engine.controls.MouseInput;
+import zes.core.engine.shapes.Rectangle;
 
 public class Window {
 	private GLFWWindowSizeCallback sizeCallback;
@@ -32,11 +33,19 @@ public class Window {
 	private int[] windowPosX = new int[1];
 	private int[] windowPosY = new int[1];
 	
+	// Remove this, this is for testing...
+	private Rectangle rectangle;
+	
 	private int frames;
 	private long time;
 	
 	public Window() {
 		this("Game", 1920, 1080);
+	}
+	
+	public Window(String titleIn) {
+		
+		//this(titleIn, );
 	}
 	
 	public Window(int widthIn, int heightIn) {
@@ -47,6 +56,8 @@ public class Window {
 		title = titleIn;
 		width = widthIn;
 		height = heightIn;
+		
+		rectangle = new Rectangle();
 		
 		init();
 		loop();
@@ -97,6 +108,10 @@ public class Window {
 		initCallbacks();
 		
 		GLFW.glfwShowWindow(window);
+		
+		GLFWVidMode mode = GLFW.glfwGetVideoMode(GLFW.glfwGetPrimaryMonitor());
+		GLFW.glfwSetWindowPos(window, mode.width() / 3, mode.height() / 3);
+		//GLFW.glfwSetWindowMonitor(window, NULL, (max_width/2)-(width/2), (max_hieght/2) - (height/2), width, height, GLFW_DONT_CARE)
 	}
 	
 	public void loop() {
@@ -108,6 +123,13 @@ public class Window {
 		while (!GLFW.glfwWindowShouldClose(window) && !KeyInput.isKeyPressed(GLFW.GLFW_KEY_ESCAPE)) {
 			GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
 			
+			try {
+				rectangle.draw(0, 0, 20, 40);
+			}
+			catch (Exception e) {
+				e.printStackTrace();
+			}
+			
 			GLFW.glfwSwapBuffers(window);
 			
 			GLFW.glfwPollEvents();
@@ -117,6 +139,7 @@ public class Window {
 	}
 	
 	public void initCallbacks() {
+		// updates w and h, important for rendering assets correctly with different window sizes
 		sizeCallback = new GLFWWindowSizeCallback() {
 			@Override public void invoke(long window, int w, int h) {
 				width = w;
