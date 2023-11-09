@@ -191,6 +191,8 @@ public class Window {
 		}
 	}
 	
+	public Window getWindow() { return this; }
+	
 	public void setBackgroundColor(float r, float g, float b) {
 		GL11.glClearColor(r, g, b, 0.0f);
 		//background.set(r, b, b);
