@@ -34,21 +34,21 @@ public class Mesh {
 		vao = GL30.glGenVertexArrays();
 		GL30.glBindVertexArray(vao);
 		
-		//do position buffer stuff
+		// Do position buffer stuff
 		pbo = storeData(0, 3, Type.POS);
-		//color stuff
+		// Color stuff
 		cbo = storeData(1, 3, Type.COL);
-		//texture stuff
+		// Texture stuff
 		tbo = storeData(2, 2, Type.TEX); // only 2D so 2 instead of 3
 		
-		//now do indice buffer stuff
+		// Now do indice buffer stuff
 		IntBuffer indicesBuffer = MemoryUtil.memAllocInt(indices.length);
 		indicesBuffer.put(indices).flip();
 		
 		ibo = GL15.glGenBuffers();
 		GL15.glBindBuffer(GL15.GL_ELEMENT_ARRAY_BUFFER, ibo);
 		GL15.glBufferData(GL15.GL_ELEMENT_ARRAY_BUFFER, indicesBuffer, GL15.GL_STATIC_DRAW);
-		//unbind the buffer -> 0
+		// Unbind the buffer -> 0
 		GL15.glBindBuffer(GL15.GL_ELEMENT_ARRAY_BUFFER, 0);
 	}
 	

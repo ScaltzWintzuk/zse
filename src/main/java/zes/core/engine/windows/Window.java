@@ -15,6 +15,7 @@ import org.lwjgl.system.MemoryUtil;
 import zes.core.engine.controls.KeyInput;
 import zes.core.engine.controls.MouseInput;
 import zes.core.engine.shapes.Rectangle;
+import zes.core.engine.utils.ZColors;
 
 public class Window {
 	private GLFWWindowSizeCallback sizeCallback;
@@ -124,7 +125,7 @@ public class Window {
 			GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
 			
 			try {
-				rectangle.draw(0, 0, 20, 40);
+				rectangle.draw(ZColors.yellow, 0, 0, 20, 40);
 			}
 			catch (Exception e) {
 				e.printStackTrace();
