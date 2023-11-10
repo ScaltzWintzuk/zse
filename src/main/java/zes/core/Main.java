@@ -1,3 +1,9 @@
+/**
+ * @author - Andrew White
+ * @description - This is a 2D/3D Game Engine to be able to drag and drop assets into a asset management system while also being able to program collisions and game logic through Java.
+ * @version - 0.0.1-SNAPSHOT
+ */
+
 package zes.core;
 
 import zes.core.engine.windows.Window;

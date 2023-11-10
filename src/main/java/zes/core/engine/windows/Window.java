@@ -16,6 +16,7 @@ import zes.core.engine.controls.KeyInput;
 import zes.core.engine.controls.MouseInput;
 import zes.core.engine.shapes.Rectangle;
 import zes.core.engine.utils.ZColors;
+import zes.core.engine.utils.ZKeyboardConstants;
 
 public class Window {
 	private GLFWWindowSizeCallback sizeCallback;
@@ -58,7 +59,7 @@ public class Window {
 		width = widthIn;
 		height = heightIn;
 		
-		rectangle = new Rectangle();
+		rectangle = new Rectangle(ZColors.YELLOW, 0, 0, 20, 40);
 		
 		init();
 		loop();
@@ -125,7 +126,7 @@ public class Window {
 			GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
 			
 			try {
-				rectangle.draw(ZColors.yellow, 0, 0, 20, 40);
+				rectangle.draw();
 			}
 			catch (Exception e) {
 				e.printStackTrace();
@@ -134,9 +135,31 @@ public class Window {
 			GLFW.glfwSwapBuffers(window);
 			
 			GLFW.glfwPollEvents();
+			
+			checkMovements();
 		}
 		
 		destroy();
+	}
+	
+	/**
+	 * This method will be removed soon, it is only there to move the rectangle in the engine
+	 */
+	@Deprecated public void checkMovements() {
+		if (keyInput.isKeyPressed(ZKeyboardConstants.UP_MOVE)) {
+			rectangle.setYPos(rectangle.getYPos() + 1);
+		}
+		if (keyInput.isKeyPressed(ZKeyboardConstants.DOWN_MOVE)) {
+			rectangle.setYPos(rectangle.getYPos() - 1);
+		}
+		if (keyInput.isKeyPressed(ZKeyboardConstants.LEFT_MOVE)) {
+			rectangle.setXPos(rectangle.getXPos() - 1);
+		}
+		if (keyInput.isKeyPressed(ZKeyboardConstants.RIGHT_MOVE)) {
+			rectangle.setXPos(rectangle.getXPos() + 1);
+		}
+		
+		System.out.printf("[%d, %d]\n", rectangle.getXPos(), rectangle.getYPos());
 	}
 	
 	public void initCallbacks() {

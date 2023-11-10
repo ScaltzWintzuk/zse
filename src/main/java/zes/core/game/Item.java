@@ -1,6 +1,6 @@
 package zes.core.game;
 
-public class Item {
+public class Item extends Entity {
 	private String name;
 	private String description;
 	
