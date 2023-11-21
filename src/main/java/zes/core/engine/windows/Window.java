@@ -15,8 +15,10 @@ import org.lwjgl.system.MemoryUtil;
 import zes.core.engine.controls.ControllerManager;
 import zes.core.engine.controls.KeyInput;
 import zes.core.engine.controls.MouseInput;
+import zes.core.engine.graphics.Shader;
 import zes.core.engine.shapes.Circle;
 import zes.core.engine.shapes.Rectangle;
+import zes.core.engine.utils.Constants;
 import zes.core.engine.utils.ZColors;
 import zes.core.engine.utils.ZKeyboardConstants;
 
@@ -24,6 +26,7 @@ public class Window {
 	private GLFWWindowSizeCallback sizeCallback;
 	private KeyInput keyInput;
 	private MouseInput mouseInput;
+	private Shader shader;
 	
 	private long window;
 	
@@ -62,10 +65,11 @@ public class Window {
 		height = heightIn;
 		
 		screen = new Screen();
+		shader = new Shader(Constants.VERTEX_FILE_PATH, Constants.FRAGMENT_FILE_PATH);
 		
-		rectangle = new Rectangle(ZColors.YELLOW, -0.66f, -0.66f, 0.33f, 0.33f);
-		rect2 = new Rectangle(ZColors.PURPLE, 0.5f, 0.5f, 0.5f, 0.5f);
-		circle = new Circle();
+		//rectangle = new Rectangle(ZColors.YELLOW, -0.66f, -0.66f, 0.33f, 0.33f);
+		//rect2 = new Rectangle(ZColors.PURPLE, 0.5f, 0.5f, 0.5f, 0.5f);
+		//circle = new Circle();
 		
 		init();
 		loop();
@@ -131,13 +135,10 @@ public class Window {
 			GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
 			
 			try {
-				// rendering stuff
+				// Rendering stuff
+				screen.draw();
 				
-				rectangle.draw();
-				rect2.draw();
-				circle.draw();
-				
-				ControllerManager.checkMovements(rectangle, rect2);
+				//ControllerManager.checkMovements(rectangle, rect2);
 			}
 			catch (Exception e) {
 				e.printStackTrace();

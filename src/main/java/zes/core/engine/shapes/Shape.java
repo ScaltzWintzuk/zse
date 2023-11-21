@@ -2,7 +2,7 @@ package zes.core.engine.shapes;
 
 import zes.core.engine.utils.ZColor;
 
-public class Shape {
+public abstract class Shape {
 	private ZColor color;
 	
 	public Shape() {
@@ -12,4 +12,6 @@ public class Shape {
 	public Shape(ZColor colorIn) { 
 		
 	}
+	
+	public abstract void draw();
 }

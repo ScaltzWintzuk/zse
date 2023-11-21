@@ -1,24 +1,28 @@
 package zes.core.engine.files;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Scanner;
 
 public class FileUtils {
-	public static String loadAsString(String path) {
+	public static String loadAsString(String path) throws FileNotFoundException {
 		StringBuilder result = new StringBuilder();
 		
-		try (BufferedReader reader = new BufferedReader(new InputStreamReader(FileUtils.class.getResourceAsStream(path)))) {
+		try (Scanner reader = new Scanner(path)) {
 			String line = "";
-			while ((line = reader.readLine()) != null) {
-				result.append(line).append("\n");
+			//while ((line = reader.nextLine()) != null) {
+			while (reader.hasNextLine()) {
+				result.append(line);
+				//append("\n");
 			}
-		}
-		catch (IOException e) {
-			System.err.println("File not found at: " + path);
-			e.printStackTrace();
 		}
 		
 		return result.toString();
+	}
+	
+	@Deprecated public static String debugBuildString(String path) throws FileNotFoundException {
+		return path;
 	}
 }

@@ -1,5 +1,7 @@
 package zes.core.engine.graphics;
 
+import java.io.FileNotFoundException;
+
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL20;
 
@@ -9,11 +11,29 @@ public class Shader {
 	private String vertexFile, fragmentFile;
 	private int vertexID, fragmentID, programID;
 	
+	/**
+	 * Loads the vertex and fragment shader file paths via String
+	 * @param vertexPath
+	 * @param fragmentPath
+	 */
 	public Shader(String vertexPath, String fragmentPath) {
-		vertexFile = FileUtils.loadAsString(vertexPath);
-		fragmentFile = FileUtils.loadAsString(fragmentPath);
+		try {
+			vertexFile = FileUtils.loadAsString(vertexPath);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			fragmentFile = FileUtils.loadAsString(fragmentPath);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
+	/**
+	 * Assigns an ID to the Program, Vector, and Fragment using the vetex and fragment shader files
+	 */
 	public void create() {
 		programID = GL20.glCreateProgram();
 		vertexID = GL20.glCreateShader(GL20.GL_VERTEX_SHADER);
