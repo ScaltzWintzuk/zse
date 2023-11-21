@@ -18,7 +18,7 @@ public class TextureSystem {
 	private static TextureSystem instance;
 
 	//-------------------------
-	//TextureSyste Constructors
+	// TextureSystem Constructors
 	//-------------------------
 
 	public static TextureSystem getInstance() {
@@ -32,8 +32,12 @@ public class TextureSystem {
 	//---------------------
 	//TextureSystem Methods
 	//---------------------
-
-	/** Attempts to register a texture into OpenGL. Upon passing, the texture will have it's associated file properties loaded. */
+	
+	/**
+	 * Attempts to register a texture into OpenGL. Upon passing, the texture will have it's associated file properties loaded.
+	 * @param textureIn
+	 * @return
+	 */
 	public GameTexture registerTexture(GameTexture textureIn) {
 		if (textureIn != null) {
 			
@@ -47,7 +51,7 @@ public class TextureSystem {
 			
 			if (textureIn.getTextureID() > 0) {
 				//System.out.println("Registered Texture: " + textureIn.getTextureID() + " : " + textureIn.getFilePath());
-				//now register child textures (if there are any)
+				// Now register child textures (if there are any)
 				textureIn.registerChildTextures(this);
 			}
 			else {
@@ -57,8 +61,11 @@ public class TextureSystem {
 		
 		return textureIn;
 	}
-
-	/** Attempts to delete a registered texture from OpenGL. */
+	
+	/**
+	 * Attempts to delete a registered texture from OpenGL.
+	 * @param textureIn
+	 */
 	public void destroyTexture(GameTexture textureIn) {
 		if (textureIn != null) {
 			if (isTextureRegistered(textureIn)) {
@@ -79,8 +86,11 @@ public class TextureSystem {
 			else { System.err.println("Texture destroy error: " + textureIn.getFilePath() + " has not been registered!"); }
 		}
 	}
-
-	/** Binds the current texture to OpenGL if the texture has been registered. */
+	
+	/**
+	 * Binds the current texture to OpenGL if the texture has been registered.
+	 * @param textureIn
+	 */
 	public void bind(GameTexture textureIn) {
 		if (textureIn != null) {
 			if (isTextureRegistered(textureIn)) {
@@ -90,27 +100,34 @@ public class TextureSystem {
 			else { System.err.println("Texture bind error: " + textureIn.getFilePath() + " has not been registered!"); }
 		}
 	}
-
-	/** Returns true if the specified texture has been registered into OpenGL. */
+	
+	/**
+	 * Returns true if the specified texture has been registered into OpenGL. 
+	 * @param textureIn
+	 * @return
+	 */
 	public boolean isTextureRegistered(GameTexture textureIn) { return textureIn != null && registeredTextures.contains(textureIn); }
 
+	/**
+	 * Destroys all the textures within a TextureSystem manager
+	 */
 	public void destroyAllTextures() {
-		//unbind first
+		// Unbind first
 		GL46.glBindTexture(GL46.GL_TEXTURE_2D, 0);
 		current = null;
 		
-		//destroy each
+		// Destroy each
 		registeredTextures.forEach(t -> t.destroy());
 	}
 	
 	//---------------------
-	//TextureSystem Getters
+	// TextureSystem Getters
 	//---------------------
 	
 	public GameTexture getBoundTexture() { return current; }
 	
 	//------------------------------
-	//TextureSystem Internal Methods
+	// TextureSystem Internal Methods
 	//------------------------------
 
 	private void registerI(GameTexture textureIn) {

@@ -35,7 +35,7 @@ public class MouseInput {
 		// Updates the buttons array when an action happens to the mouse buttons
 		mouse = new GLFWMouseButtonCallback() {
 			@Override public void invoke(long window, int button, int action, int mods) {
-				buttons[button] = (action != GLFW.GLFW_RELEASE);
+				buttons[button] = (action == GLFW.GLFW_RELEASE);
 				
 				if (isButtonPressed(0)) {
 					printStats();

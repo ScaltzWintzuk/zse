@@ -17,7 +17,7 @@ public class ZKeyboardConstants {
 	// Arrow Keys
 	public static int UP_ARROW = GLFW.GLFW_KEY_UP;
 	public static int DOWN_ARROW = GLFW.GLFW_KEY_DOWN;
-	public static int LEFT_ARROW = GLFW.GLFW_KEY_RIGHT;
+	public static int LEFT_ARROW = GLFW.GLFW_KEY_LEFT;
 	public static int RIGHT_ARROW = GLFW.GLFW_KEY_RIGHT;
 	
 	// Number Keys

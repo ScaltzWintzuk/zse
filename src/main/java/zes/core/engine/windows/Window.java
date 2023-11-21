@@ -12,8 +12,10 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.system.MemoryStack;
 import org.lwjgl.system.MemoryUtil;
 
+import zes.core.engine.controls.ControllerManager;
 import zes.core.engine.controls.KeyInput;
 import zes.core.engine.controls.MouseInput;
+import zes.core.engine.shapes.Circle;
 import zes.core.engine.shapes.Rectangle;
 import zes.core.engine.utils.ZColors;
 import zes.core.engine.utils.ZKeyboardConstants;
@@ -36,7 +38,7 @@ public class Window {
 	private int[] windowPosY = new int[1];
 	
 	// Remove this, this is for testing...
-	private Rectangle rectangle;
+	private Screen screen;
 	
 	private int frames;
 	private long time;
@@ -59,7 +61,11 @@ public class Window {
 		width = widthIn;
 		height = heightIn;
 		
-		rectangle = new Rectangle(ZColors.YELLOW, 0, 0, 20, 40);
+		screen = new Screen();
+		
+		rectangle = new Rectangle(ZColors.YELLOW, -0.66f, -0.66f, 0.33f, 0.33f);
+		rect2 = new Rectangle(ZColors.PURPLE, 0.5f, 0.5f, 0.5f, 0.5f);
+		circle = new Circle();
 		
 		init();
 		loop();
@@ -100,7 +106,6 @@ public class Window {
 		    GLFWVidMode vidMode = GLFW.glfwGetVideoMode(GLFW.glfwGetPrimaryMonitor());
 		    
 		    GLFW.glfwSetWindowPos(window, vidMode.width() - pWidth.get(0) / 2, vidMode.height() - pHeight.get(0) / 2);
-		
 		}
 		
 		GLFW.glfwMakeContextCurrent(window);
@@ -126,41 +131,26 @@ public class Window {
 			GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
 			
 			try {
+				// rendering stuff
+				
 				rectangle.draw();
+				rect2.draw();
+				circle.draw();
+				
+				ControllerManager.checkMovements(rectangle, rect2);
 			}
 			catch (Exception e) {
 				e.printStackTrace();
 			}
 			
 			GLFW.glfwSwapBuffers(window);
-			
 			GLFW.glfwPollEvents();
 			
-			checkMovements();
 		}
 		
 		destroy();
 	}
 	
-	/**
-	 * This method will be removed soon, it is only there to move the rectangle in the engine
-	 */
-	@Deprecated public void checkMovements() {
-		if (keyInput.isKeyPressed(ZKeyboardConstants.UP_MOVE)) {
-			rectangle.setYPos(rectangle.getYPos() + 1);
-		}
-		if (keyInput.isKeyPressed(ZKeyboardConstants.DOWN_MOVE)) {
-			rectangle.setYPos(rectangle.getYPos() - 1);
-		}
-		if (keyInput.isKeyPressed(ZKeyboardConstants.LEFT_MOVE)) {
-			rectangle.setXPos(rectangle.getXPos() - 1);
-		}
-		if (keyInput.isKeyPressed(ZKeyboardConstants.RIGHT_MOVE)) {
-			rectangle.setXPos(rectangle.getXPos() + 1);
-		}
-		
-		System.out.printf("[%d, %d]\n", rectangle.getXPos(), rectangle.getYPos());
-	}
 	
 	public void initCallbacks() {
 		// updates w and h, important for rendering assets correctly with different window sizes

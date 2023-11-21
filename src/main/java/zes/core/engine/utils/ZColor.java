@@ -30,4 +30,9 @@ public class ZColor {
 	public void setG(float gIn) { g = gIn; }
 	public void setB(float bIn) { b = bIn; }
 	public void setA(float aIn) { a = aIn; }
+	
+	public void incR() { r++; }
+	public void incG() { g++; }
+	public void incB() { b++; }
+	public void incA() { a++; }
 }

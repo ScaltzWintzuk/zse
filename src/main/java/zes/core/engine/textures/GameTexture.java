@@ -5,14 +5,19 @@ import org.lwjgl.opengl.GL11;
 public class GameTexture {
 	/** The internal name of this texture. */
 	private String name;
+	
 	/** The internal use ID for this texture object. -1 indicates an unregistered texture ID. -- Assigned dynamically through texture registration. */
 	public int textureID = -1;
+	
 	/** The file system path where this texture exists. */
 	private String filePath;
+	
 	/** The texture's width in pixels. -- Assigned dynamically through texture registration. */
 	public int width = -1;
+	
 	/** The texture's height in pixels. -- Assigned dynamically through texture registration. */
 	public int height = -1;
+	
 	/** True if this texture ID has been deleted through OpenGL. */
 	private boolean destroyed = false;
 	
