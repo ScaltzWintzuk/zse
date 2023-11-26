@@ -42,7 +42,7 @@ public class Window {
 	private int[] windowPosY = new int[1];
 	
 	// Remove this, this is for testing...
-	private Screen screen;
+	//private Screen screen;
 	
 	private ZStack<Screen> screens;
 	
@@ -67,23 +67,30 @@ public class Window {
 		width = widthIn;
 		height = heightIn;
 		
-		screen = new Screen();
+		//screen = new Screen();
 		screens = new ZStack<Screen>();
+		screens.push(new Screen());
 		
-		shader = new Shader(Constants.VERTEX_FILE_PATH, Constants.FRAGMENT_FILE_PATH);
+		//shader = new Shader(Constants.VERTEX_FILE_PATH, Constants.FRAGMENT_FILE_PATH);
 		
 		//rectangle = new Rectangle(ZColors.YELLOW, -0.66f, -0.66f, 0.33f, 0.33f);
 		//rect2 = new Rectangle(ZColors.PURPLE, 0.5f, 0.5f, 0.5f, 0.5f);
 		//circle = new Circle();
 		
+		// Main Game Mechanics in the current window
 		init();
 		loop();
+		
+		// When loop is closed out, close the window
 		close();
 	}
 	
 	public void init() {
 		keyInput = new KeyInput();
 		mouseInput = new MouseInput();
+		
+		// TEMPORARY SCREEN STUFF
+		getCurrentScreen().addShape(new Rectangle(ZColors.YELLOW, -0.66f, -0.66f, 0.33f, 0.33f));
 		
 		if (!GLFW.glfwInit()) {
 			throw new IllegalStateException("Unable to initialize GLFW");
@@ -138,13 +145,10 @@ public class Window {
 		// Renders the window until the window is closed or ESCAPE is hit.
 		while (!GLFW.glfwWindowShouldClose(window) && !KeyInput.isKeyPressed(GLFW.GLFW_KEY_ESCAPE)) {
 			GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
-			
 			try {
 				// Rendering stuff
-				
+				getCurrentScreen().draw();
 				//update();
-				
-				//ControllerManager.checkMovements(rectangle, rect2);
 			}
 			catch (Exception e) {
 				e.printStackTrace();
@@ -206,7 +210,7 @@ public class Window {
 		GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
 		
 		try {
-			screen.draw();
+			getCurrentScreen().draw();
 		}
 		catch(Exception e) {
 			e.printStackTrace();
@@ -223,6 +227,8 @@ public class Window {
 			frames = 0;
 		}
 	}
+	
+	public Screen getCurrentScreen() { return screens.peek(); }
 	
 	public Window getWindow() { return this; }
 	
