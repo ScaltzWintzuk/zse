@@ -6,13 +6,13 @@ import zes.core.engine.shapes.Shape;
 import zes.core.engine.textures.GameTexture;
 
 public class Screen {
-	private ArrayList<GameTexture> textures;
+	//private ArrayList<GameTexture> textures;
 	
 	// This is temporary, remove this later
 	private ArrayList<Shape> shapes;
 	
 	public Screen() {
-		textures = new ArrayList<GameTexture>();
+		//textures = new ArrayList<GameTexture>();
 		shapes = new ArrayList<Shape>();
 	}
 	
@@ -24,5 +24,9 @@ public class Screen {
 		for (Shape s : shapes) {
 			s.draw();
 		}
+	}
+	
+	public void addShape(Shape s) {
+		shapes.add(s);
 	}
 }

@@ -8,7 +8,7 @@ import zes.core.engine.controls.MouseInput;
 import zes.core.engine.utils.ZColor;
 import zes.core.engine.utils.ZColors;
 
-public class Rectangle {
+public class Rectangle extends Shape {
 	private ZColor color;
 	
 	private float xPos, yPos;

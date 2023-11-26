@@ -5,10 +5,14 @@ import org.lwjgl.opengl.GL11;
 import zes.core.engine.utils.ZColor;
 import zes.core.engine.utils.ZColors;
 
-public class Circle {
+public class Circle extends Shape {
 	private ZColor color;
 	
 	private Rectangle hitbox;
+	
+	public static final float Z_PI = 3.1415926535f;
+	public static final float DEFAULT_RADIUS = 0.33f;
+	public static final ZColor DEFAULT_COLOR = ZColors.YELLOW;
 	
 	private float radius;
 	
@@ -16,11 +20,11 @@ public class Circle {
 	private float xVec, yVec;
 	
 	public Circle() {
-		this(0.33f);
+		this(DEFAULT_RADIUS);
 	}
 	
 	public Circle(float radiusIn) {
-		this(ZColors.YELLOW, radiusIn);
+		this(DEFAULT_COLOR, radiusIn);
 	}
 	
 	public Circle(ZColor colorIn, float radiusIn) {
@@ -33,17 +37,18 @@ public class Circle {
 	}
 	
 	public void draw() {
-		draw(0.33f);
+		draw(DEFAULT_RADIUS);
 	}
 	
 	public void draw(float radius) {
-		draw(ZColors.BLUE, radius);
+		draw(DEFAULT_COLOR, radius);
 	}
 	
 	public void draw(ZColor color, float radius) {
 		GL11.glColor3f(color.getR(), color.getG(), color.getB());
 		
 	    GL11.glBegin(GL11.GL_LINE_LOOP);
+	    
 	    int size = 77;
 	    for(int i = 0; i < size; i++)
 	    {

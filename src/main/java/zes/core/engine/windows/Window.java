@@ -21,6 +21,7 @@ import zes.core.engine.shapes.Rectangle;
 import zes.core.engine.utils.Constants;
 import zes.core.engine.utils.ZColors;
 import zes.core.engine.utils.ZKeyboardConstants;
+import zes.core.engine.utils.ZStack;
 
 public class Window {
 	private GLFWWindowSizeCallback sizeCallback;
@@ -42,6 +43,8 @@ public class Window {
 	
 	// Remove this, this is for testing...
 	private Screen screen;
+	
+	private ZStack<Screen> screens;
 	
 	private int frames;
 	private long time;
@@ -65,6 +68,8 @@ public class Window {
 		height = heightIn;
 		
 		screen = new Screen();
+		screens = new ZStack<Screen>();
+		
 		shader = new Shader(Constants.VERTEX_FILE_PATH, Constants.FRAGMENT_FILE_PATH);
 		
 		//rectangle = new Rectangle(ZColors.YELLOW, -0.66f, -0.66f, 0.33f, 0.33f);
@@ -136,7 +141,8 @@ public class Window {
 			
 			try {
 				// Rendering stuff
-				screen.draw();
+				
+				//update();
 				
 				//ControllerManager.checkMovements(rectangle, rect2);
 			}
@@ -176,6 +182,9 @@ public class Window {
 		GLFW.glfwSetWindowSizeCallback(window, sizeCallback);
 	}
 	
+	/**
+	 * Frees all of the callbacks and destroys the window
+	 */
 	public void close() {
 		Callbacks.glfwFreeCallbacks(window);
 		GLFW.glfwDestroyWindow(window);
@@ -184,6 +193,9 @@ public class Window {
 		GLFW.glfwSetErrorCallback(null).free();
 	}
 	
+	/**
+	 * Updates the buffer and 
+	 */
 	public void update() {
 		if (isResized) {
 			GL11.glViewport(0, 0, width, height);
@@ -192,6 +204,13 @@ public class Window {
 		
 		GL11.glClearColor(background.x, background.y, background.z, 1.0f);
 		GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
+		
+		try {
+			screen.draw();
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
 		
 		// Gets rid of the stuff from the previous frame
 		GLFW.glfwPollEvents();
