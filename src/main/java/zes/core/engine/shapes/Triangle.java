@@ -5,7 +5,7 @@ import org.lwjgl.opengl.GL11;
 import zes.core.engine.utils.ZColor;
 import zes.core.engine.utils.ZColors;
 
-public class Triangle {
+public class Triangle extends Shape {
 	private ZColor color;
 	
 	private int xPos, yPos;

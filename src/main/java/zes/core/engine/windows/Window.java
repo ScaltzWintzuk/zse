@@ -194,7 +194,14 @@ public class Window {
 		GLFW.glfwDestroyWindow(window);
 		
 		GLFW.glfwTerminate();
-		GLFW.glfwSetErrorCallback(null).free();
+		try {
+			GLFW.glfwSetErrorCallback(null).free();
+		}
+		catch (Exception e) {
+			
+		}
+		
+		System.out.println("Closing...");
 	}
 	
 	/**
