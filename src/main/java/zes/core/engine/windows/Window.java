@@ -24,16 +24,20 @@ import zes.core.engine.utils.ZKeyboardConstants;
 import zes.core.engine.utils.ZStack;
 
 public class Window {
+	// All Callbacks
 	private GLFWWindowSizeCallback sizeCallback;
 	private KeyInput keyInput;
 	private MouseInput mouseInput;
 	private Shader shader;
 	
+	// The Window Memory Address itself
 	private long window;
 	
+	// Window Attributes
 	private String title;
 	private int width, height;
 	
+	// Window Booleans
 	private boolean isResized;
 	private boolean isFullScreen;
 	
@@ -41,11 +45,9 @@ public class Window {
 	private int[] windowPosX = new int[1];
 	private int[] windowPosY = new int[1];
 	
-	// Remove this, this is for testing...
-	//private Screen screen;
+	private ZStack<Screen> screens; // Keeps track of the current screen and previous screens
 	
-	private ZStack<Screen> screens;
-	
+	// Delta Time Stuff
 	private int frames;
 	private long time;
 	
@@ -147,8 +149,8 @@ public class Window {
 			GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
 			try {
 				// Rendering stuff
-				getCurrentScreen().draw();
-				//update();
+				//getCurrentScreen().draw();
+				update();
 			}
 			catch (Exception e) {
 				e.printStackTrace();
@@ -174,10 +176,10 @@ public class Window {
 			}
 		};
 		
-		// Keyboard callbacks
+		// Keyboard Callbacks
 		GLFW.glfwSetKeyCallback(window, keyInput.getKeyCallback());
 		
-		// Mouse callbacks
+		// Mouse Callbacks
 		GLFW.glfwSetCursorPosCallback(window, mouseInput.getCursorPositionCallback());
 		GLFW.glfwSetMouseButtonCallback(window, mouseInput.getMouseButtonCallback());
 		GLFW.glfwSetScrollCallback(window, mouseInput.getScrollCallback());
