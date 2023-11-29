@@ -95,7 +95,7 @@ public class Window {
 		// File Manager stuff
 		try {
 			FileManager.updateCurrentFile("test.zwrld");
-			FileManager.load();
+			//FileManager.load();
 		}
 		catch (Exception e) {
 			
