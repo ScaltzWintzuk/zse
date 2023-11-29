@@ -2,11 +2,26 @@ package zes.core.engine.controls;
 
 import org.lwjgl.glfw.GLFWWindowSizeCallback;
 
+import zes.core.engine.files.FileManager;
 import zes.core.engine.shapes.Circle;
 import zes.core.engine.shapes.Rectangle;
 import zes.core.engine.utils.ZKeyboardConstants;
 
 public class ControllerManager {
+	/**
+	 * Remove this later
+	 */
+	@Deprecated public static void checkKeyStuff() {
+		/*
+		if (KeyInput.isKeyPressed(ZKeyboardConstants.ONE)) {
+			FileManager.save();
+		}
+		*/
+		
+		if (KeyInput.isKeyPressed(ZKeyboardConstants.TWO)) {
+			FileManager.load();
+		}
+	}
 	
 	/**
 	 * Will change this, but for now this checks the movements for the rectangle based on WASD

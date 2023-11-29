@@ -15,6 +15,7 @@ import org.lwjgl.system.MemoryUtil;
 import zes.core.engine.controls.ControllerManager;
 import zes.core.engine.controls.KeyInput;
 import zes.core.engine.controls.MouseInput;
+import zes.core.engine.files.FileManager;
 import zes.core.engine.graphics.Shader;
 import zes.core.engine.shapes.Circle;
 import zes.core.engine.shapes.Rectangle;
@@ -90,6 +91,15 @@ public class Window {
 	public void init() {
 		keyInput = new KeyInput();
 		mouseInput = new MouseInput();
+		
+		// File Manager stuff
+		try {
+			FileManager.updateCurrentFile("test.zwrld");
+			FileManager.load();
+		}
+		catch (Exception e) {
+			
+		}
 		
 		// TEMPORARY SCREEN STUFF
 		getCurrentScreen().addShape(new Rectangle(ZColors.YELLOW, -0.66f, -0.66f, 0.33f, 0.33f));
@@ -202,6 +212,9 @@ public class Window {
 		catch (Exception e) {
 			
 		}
+		
+		// Save here
+		FileManager.save(getCurrentScreen());
 		
 		System.out.println("Closing...");
 	}

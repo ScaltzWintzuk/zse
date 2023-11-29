@@ -29,4 +29,10 @@ public class Screen {
 	public void addShape(Shape s) {
 		shapes.add(s);
 	}
+	
+	// ------------------
+	//      Getters
+	// ------------------
+	public ArrayList<Shape> getShapes() { return shapes; }
+	public Shape getShape(int index) { return shapes.get(index); }
 }
