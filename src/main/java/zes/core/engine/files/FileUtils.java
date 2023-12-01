@@ -7,7 +7,7 @@ import java.io.InputStreamReader;
 import java.util.Scanner;
 
 public class FileUtils {
-	public static String loadAsString(String path) throws FileNotFoundException {
+	public static String loadAsStringShader(String path) throws FileNotFoundException {
 		StringBuilder result = new StringBuilder();
 		
 		try (Scanner reader = new Scanner(path)) {
@@ -20,6 +20,10 @@ public class FileUtils {
 		}
 		
 		return result.toString();
+	}
+	
+	public static String loadAsStringWorldFile(String path) throws FileNotFoundException {
+		return "";
 	}
 	
 	@Deprecated public static String debugBuildString(String path) throws FileNotFoundException {

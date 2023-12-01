@@ -1,4 +1,4 @@
-package zes.core.game;
+package zes.core.game.gameobjects;
 
 import zes.core.engine.textures.GameTexture;
 

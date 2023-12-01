@@ -19,7 +19,7 @@ public class ControllerManager {
 		*/
 		
 		if (KeyInput.isKeyPressed(ZKeyboardConstants.TWO)) {
-			FileManager.load();
+			//FileManager.load();
 		}
 	}
 	
