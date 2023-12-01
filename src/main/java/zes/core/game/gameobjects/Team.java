@@ -33,6 +33,14 @@ public class Team {
 	}
 	
 	/**
+	 * Returns the size of the team
+	 * @return
+	 */
+	public int getSize() { 
+		return entities.length;
+	}
+	
+	/**
 	 * Updates the entity given an index returning true or false if it was successful or not
 	 * @param entity
 	 * @param index
@@ -46,8 +54,12 @@ public class Team {
 		return true;
 	}
 	
+	/**
+	 * Says the debug info for the entire team with their fields
+	 */
 	public void debugTeamInfo() {
 		System.out.printf("%sTeam Info: \n%s", Constants.DEBUG_INFO_LINES, Constants.DEBUG_INFO_LINES);
+		
 		for (int i = 0; i < entities.length; i++) {
 			if (entities[i] != null) {
 				System.out.printf("Slot #%d: Name: %s -- Id: %d\n", i, entities[i].getName(), entities[i].getId());

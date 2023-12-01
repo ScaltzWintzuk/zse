@@ -1,5 +1,5 @@
 package zes.core.game.gameobjects;
 
-public class Player {
-
+public class Player extends Entity {
+	
 }

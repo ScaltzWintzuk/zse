@@ -28,7 +28,7 @@ public class Entity implements Comparable<Entity> {
 		yPos = 0;
 		
 		currentFrame = 0;
-		hitbox = new Rectangle(ZColors.BLUE, xPos, yPos, 0.33f, 0.33f);
+		hitbox = new Rectangle(ZColors.BLUE, xPos, yPos, 0.33f, 0.33f); // REMOVE THIS LATER
 	}
 	
 	public void draw() {

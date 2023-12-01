@@ -1,5 +1,7 @@
 package zes.core.game.screens;
 
-public class MainMenu {
+import zes.core.engine.windows.Screen;
+
+public class MainMenu extends Screen {
 
 }
