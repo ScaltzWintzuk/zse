@@ -37,5 +37,30 @@ public class Battle {
 				counter++;
 			}
 		}
+		
+		initTurnOrder();
 	}
+	
+	/**
+	 * Using attack speed, sort the entities turn order
+	 */
+	public void initTurnOrder() {
+		for (int i = 0; i < entities.length; i++) {
+			for (int j = 0; j < entities.length - 1 - i; j++) {
+				
+			}
+		}
+	}
+	
+	/**
+	 * Swaps two entities with eachother
+	 * @param e1
+	 * @param e2
+	 */
+	public void swap(Entity e1, Entity e2) {
+		Entity temp = e1;
+		e1 = e2;
+		e2 = temp;
+	}
+	
 }

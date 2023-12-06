@@ -5,10 +5,15 @@ public class Item extends Entity {
 	
 	private int buyPrice, sellPrice;
 	
-	public Item(String descriptionIn, int buyPriceIn, int sellPriceIn) {
+	public Item(String nameIn, String descriptionIn, int buyPriceIn, int sellPriceIn) {
+		super(nameIn);
 		description = descriptionIn;
 		buyPrice = buyPriceIn;
 		sellPrice = sellPriceIn;
+	}
+	
+	@Override public String toString() {
+		return String.format("Type: %d, Name: %s, Description: %s, Buy: %.2f, Sell: %.2f\n", this.getClass().getName(), getName(), description, buyPrice, sellPrice);
 	}
 	
 	// Getters

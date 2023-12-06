@@ -18,13 +18,13 @@ public class Shader {
 	 */
 	public Shader(String vertexPath, String fragmentPath) {
 		try {
-			vertexFile = FileUtils.loadAsString(vertexPath);
+			vertexFile = FileUtils.loadAsStringShader(vertexPath);
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		try {
-			fragmentFile = FileUtils.loadAsString(fragmentPath);
+			fragmentFile = FileUtils.loadAsStringShader(fragmentPath);
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
