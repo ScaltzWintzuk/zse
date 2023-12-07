@@ -12,16 +12,14 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.system.MemoryStack;
 import org.lwjgl.system.MemoryUtil;
 
+import test.Debug1;
 import zes.core.engine.controls.ControllerManager;
 import zes.core.engine.controls.KeyInput;
 import zes.core.engine.controls.MouseInput;
 import zes.core.engine.files.FileManager;
 import zes.core.engine.graphics.Shader;
-import zes.core.engine.shapes.Circle;
 import zes.core.engine.shapes.Rectangle;
-import zes.core.engine.utils.Constants;
 import zes.core.engine.utils.ZColors;
-import zes.core.engine.utils.ZKeyboardConstants;
 import zes.core.engine.utils.ZStack;
 
 public class Window {
@@ -147,6 +145,8 @@ public class Window {
 		GLFWVidMode mode = GLFW.glfwGetVideoMode(GLFW.glfwGetPrimaryMonitor());
 		GLFW.glfwSetWindowPos(window, mode.width() / 3, mode.height() / 3);
 		//GLFW.glfwSetWindowMonitor(window, NULL, (max_width/2)-(width/2), (max_hieght/2) - (height/2), width, height, GLFW_DONT_CARE)
+	
+		Debug1.debugScreens();
 	}
 	
 	public void loop() {
@@ -161,6 +161,7 @@ public class Window {
 				// Rendering stuff
 				//getCurrentScreen().draw();
 				update();
+				ControllerManager.checkMovements((Rectangle)Debug1.debugScreen.getShape(1), (Rectangle)Debug1.debugScreen.getShape(2));
 			}
 			catch (Exception e) {
 				e.printStackTrace();
@@ -232,7 +233,8 @@ public class Window {
 		GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
 		
 		try {
-			getCurrentScreen().draw();
+			//getCurrentScreen().draw();
+			Debug1.debugScreen.draw();
 		}
 		catch(Exception e) {
 			e.printStackTrace();
