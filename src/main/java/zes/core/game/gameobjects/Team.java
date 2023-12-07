@@ -3,14 +3,14 @@ package zes.core.game.gameobjects;
 import zes.core.engine.utils.Constants;
 
 public class Team {
-	private Entity[] entities;
+	private EntityObject[] entities;
 	
 	public Team() {
 		this(4);
 	}
 	
 	public Team(int maxSize) {
-		entities = new Entity[maxSize];
+		entities = new EntityObject[maxSize];
 	}
 	
 	/**
@@ -18,7 +18,7 @@ public class Team {
 	 * @param index
 	 * @return
 	 */
-	public Entity getEntity(int index) {
+	public EntityObject getEntity(int index) {
 		if (index >= entities.length) { return null; } 
 		
 		return entities[index];
@@ -46,7 +46,7 @@ public class Team {
 	 * @param index
 	 * @return
 	 */
-	public boolean updateEntity(Entity entity, int index) {
+	public boolean updateEntity(EntityObject entity, int index) {
 		if (index >= entities.length) { return false; }
 		
 		entities[index] = entity;

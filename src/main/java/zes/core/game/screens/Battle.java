@@ -1,19 +1,20 @@
 package zes.core.game.screens;
 
 import zes.core.game.gameobjects.Entity;
+import zes.core.game.gameobjects.EntityObject;
 import zes.core.game.gameobjects.Team;
 
 public class Battle {
 	private Team playerTeam;
 	private Team enemyTeam;
 	
-	private Entity[] entities;
+	private EntityObject[] entities;
 	
 	public Battle(Team playerTeamIn, Team enemyTeamIn) {
 		playerTeam = playerTeamIn;
 		enemyTeam = enemyTeamIn;
 		
-		entities = new Entity[playerTeam.getSize() + enemyTeam.getSize()];
+		entities = new EntityObject[playerTeam.getSize() + enemyTeam.getSize()];
 		
 		init();
 	}
@@ -38,7 +39,7 @@ public class Battle {
 			}
 		}
 		
-		initTurnOrder();
+		//initTurnOrder();
 	}
 	
 	/**
@@ -46,14 +47,40 @@ public class Battle {
 	 */
 	public void initTurnOrder() {
 		for (int i = 0; i < entities.length; i++) {
-			for (int j = 0; j < entities.length - 1 - i; j++) {
-				
+			for (int j = 0; j < entities.length - i; j++) {
+				//if (entities[j].getSpeed() > entities[j + 1].getSpeed()) {
+					swap(entities[j], entities[j + 1]);
+				//}
 			}
 		}
 	}
 	
 	/**
-	 * Swaps two entities with eachother
+	 * Checks if the enemy team is all dead by seeing if their total health falls equal to or lower than 0
+	 * @return
+	 */
+	public boolean checkWin() {
+		double totalHealth = 0;
+		for (int i = 0; i < enemyTeam.getSize(); i++) {
+			totalHealth += enemyTeam.getEntity(i).getHealth();
+		}
+		return (totalHealth <= 0);
+	}
+	
+	/**
+	 * Checks if the player team is all dead by seeing if their total health falls equal to or lower than 0
+	 * @return
+	 */
+	public boolean checkLoss() {
+		double totalHealth = 0;
+		for (int i = 0; i < playerTeam.getSize(); i++) {
+			totalHealth += playerTeam.getEntity(i).getHealth();
+		}
+		return (totalHealth <= 0);
+	}
+	
+	/**
+	 * Swaps two entities with each other
 	 * @param e1
 	 * @param e2
 	 */

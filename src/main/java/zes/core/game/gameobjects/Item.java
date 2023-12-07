@@ -12,9 +12,12 @@ public class Item extends Entity {
 		sellPrice = sellPriceIn;
 	}
 	
+	/*
 	@Override public String toString() {
-		return String.format("Type: %d, Name: %s, Description: %s, Buy: %.2f, Sell: %.2f\n", this.getClass().getName(), getName(), description, buyPrice, sellPrice);
+		return description;
+		//return String.format("Type: %d, Name: %s, Description: %s, Buy: %.2f, Sell: %.2f\n", this.getClass().getName(), getName(), description, buyPrice, sellPrice);
 	}
+	*/
 	
 	// Getters
 	public String getDescription() { return description; }
