@@ -10,8 +10,11 @@ public abstract class Shape {
 	}
 	
 	public Shape(ZColor colorIn) { 
-		
+		color = colorIn;
 	}
 	
 	public abstract void draw();
+	
+	public ZColor getColor() { return color; }
+	public void setColor(ZColor colorIn) { color = colorIn; }
 }

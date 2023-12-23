@@ -9,8 +9,6 @@ import zes.core.engine.utils.ZColor;
 import zes.core.engine.utils.ZColors;
 
 public class Rectangle extends Shape {
-	private ZColor color;
-	
 	private float xPos, yPos;
 	private float width, height;
 	
@@ -19,7 +17,7 @@ public class Rectangle extends Shape {
 	public Rectangle(float xPosIn, float yPosIn, float widthIn, float heightIn) { this(ZColors.YELLOW, xPosIn, yPosIn, widthIn, heightIn); }
 	
 	public Rectangle(ZColor colorIn, float xPosIn, float yPosIn, float widthIn, float heightIn) {
-		color = colorIn;
+		super(colorIn);
 		xPos = xPosIn;
 		yPos = yPosIn;
 		width = widthIn;
@@ -45,7 +43,7 @@ public class Rectangle extends Shape {
 	 * @param width
 	 * @param height
 	 */
-	public void draw(float x, float y, float width, float height) { draw(color, x, y, width, height); }
+	public void draw(float x, float y, float width, float height) { draw(getColor(), x, y, width, height); }
 	
 	/**
 	 * This method is the method that all draw methods eventually call, but this takes in the color, xPos, yPos, width, and height as arguments and draws the GL11.QUAD accordingly

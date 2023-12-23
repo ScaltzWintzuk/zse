@@ -4,7 +4,7 @@ import zes.core.engine.shapes.Rectangle;
 import zes.core.engine.textures.GameTexture;
 import zes.core.engine.utils.ZColors;
 
-public class Entity implements Comparable<Entity> {
+public class Entity extends Object implements Comparable<Entity> {
 	// GUI related things to the Entity
 	private GameTexture[] entityTextures;
 	private int currentFrame;

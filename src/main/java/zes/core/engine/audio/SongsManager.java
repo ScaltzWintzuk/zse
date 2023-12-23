@@ -21,4 +21,14 @@ public class SongsManager {
 	public boolean isEmpty() {
 		return songs.isEmpty();
 	}
+	
+	public void sortAlphabetically() {
+		Object[] tempSongs = songs.toArray();
+		
+		for (int i = 0; i < songs.size(); i++) {
+			for (int j = 0; j < songs.size()- i; j++) {
+				
+			}
+		}
+	}
 }
