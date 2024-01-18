@@ -6,6 +6,8 @@
 
 package zes.core;
 
+import org.lwjgl.glfw.GLFW;
+
 import zes.core.engine.windows.Window;
 
 public class Main {

@@ -25,7 +25,7 @@ public class TextureSystem {
 		return instance = (instance != null) ? instance : new TextureSystem();
 	}
 
-	private TextureSystem() {
+	public TextureSystem() {
 		// empty for now
 	}
 

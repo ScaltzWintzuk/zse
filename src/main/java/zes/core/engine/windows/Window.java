@@ -19,6 +19,8 @@ import zes.core.engine.controls.MouseInput;
 import zes.core.engine.files.FileManager;
 import zes.core.engine.graphics.Shader;
 import zes.core.engine.shapes.Rectangle;
+import zes.core.engine.textures.GlobalTextures;
+import zes.core.engine.textures.TextureSystem;
 import zes.core.engine.utils.ZColors;
 import zes.core.engine.utils.ZStack;
 
@@ -50,6 +52,9 @@ public class Window {
 	private int frames;
 	private long time;
 	
+	// TEMPORARY MOVE THIS TO A BETTER LOOP LATER!
+	private TextureSystem textureSystem;
+	
 	public Window() {
 		this("Game", 1920, 1080);
 	}
@@ -71,6 +76,11 @@ public class Window {
 		//screen = new Screen();
 		screens = new ZStack<Screen>();
 		screens.push(new Screen());
+		
+		shader = new Shader("resources/vertex.glsl", "resources/fragments.glsl");
+		
+		textureSystem = new TextureSystem();
+		GlobalTextures.registerTextures(textureSystem);
 		
 		//shader = new Shader(Constants.VERTEX_FILE_PATH, Constants.FRAGMENT_FILE_PATH);
 		

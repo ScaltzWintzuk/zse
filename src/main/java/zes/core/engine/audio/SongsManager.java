@@ -26,7 +26,7 @@ public class SongsManager {
 		Object[] tempSongs = songs.toArray();
 		
 		for (int i = 0; i < songs.size(); i++) {
-			for (int j = 0; j < songs.size()- i; j++) {
+			for (int j = 0; j < songs.size() - i; j++) {
 				
 			}
 		}
