@@ -50,7 +50,8 @@ public class TextureSystem {
 			registeredTextures.add(textureIn);
 			
 			if (textureIn.getTextureID() > 0) {
-				//System.out.println("Registered Texture: " + textureIn.getTextureID() + " : " + textureIn.getFilePath());
+				System.out.println("Registered Texture: " + textureIn.getTextureID() + " : " + textureIn.getFilePath());
+				
 				// Now register child textures (if there are any)
 				textureIn.registerChildTextures(this);
 			}

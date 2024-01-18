@@ -221,7 +221,7 @@ public class Window {
 	}
 	
 	/**
-	 * Updates the buffer and 
+	 * Updates the buffer and replaces it with the next scene with updated coordinates
 	 */
 	public void update() {
 		if (isResized) {
