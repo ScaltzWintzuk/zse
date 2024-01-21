@@ -51,11 +51,9 @@ public class Shader {
 			return;
 		}
 		
-		//attach
 		GL20.glAttachShader(programID, vertexID);
 		GL20.glAttachShader(programID, fragmentID);
 		
-		//check link success -- print link error
 		GL20.glLinkProgram(programID);
 		isLinked = GL20.glGetProgrami(programID, GL20.GL_LINK_STATUS) == 1;
 		if (!isLinked) {
@@ -64,7 +62,6 @@ public class Shader {
 			return;
 		}
 		
-		//check validate status -- print validate error
 		GL20.glValidateProgram(programID);
 		if (GL20.glGetProgrami(programID, GL20.GL_VALIDATE_STATUS) == 0) {
 			System.out.println(name + ": validate error!");
