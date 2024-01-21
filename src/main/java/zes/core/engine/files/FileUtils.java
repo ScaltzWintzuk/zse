@@ -8,6 +8,7 @@ import java.util.Scanner;
 
 public class FileUtils {
 	public static String loadAsStringShader(String path) throws FileNotFoundException {
+		/*
 		StringBuilder result = new StringBuilder();
 		
 		try (Scanner reader = new Scanner(path)) {
@@ -20,6 +21,9 @@ public class FileUtils {
 		}
 		
 		return result.toString();
+		*/
+		
+		return path;
 	}
 	
 	public static String loadAsStringWorldFile(String path) throws FileNotFoundException {

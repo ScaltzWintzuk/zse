@@ -10,7 +10,8 @@ public class GlobalTextures {
 	 * @param system
 	 */
 	public static void registerTextures(TextureSystem system) {
-		system.registerTexture(WOLF);
-		system.registerTexture(DOG);
+		
+		//system.registerTexture(WOLF);
+		//system.registerTexture(DOG);
 	}
 }

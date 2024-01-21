@@ -6,6 +6,8 @@
 
 package zes.core;
 
+import java.io.FileNotFoundException;
+
 import org.lwjgl.glfw.GLFW;
 
 import zes.core.engine.windows.Window;
@@ -13,11 +15,11 @@ import zes.core.engine.windows.Window;
 public class Main {
 	private Window window;
 	
-	public static void main(String[] args) {
-		new Main().init();;
+	public static void main(String[] args) throws FileNotFoundException {
+		new Main().init();
 	}
 	
-	public void init() {
+	public void init() throws FileNotFoundException {
 		window = new Window("Quest of Thyrah", 1920, 1080);
 	}
 	

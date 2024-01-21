@@ -6,7 +6,9 @@ in vec2 passTexCoord;
 out vec4 outColor;
 
 uniform sampler2D tex;
+uniform int isTexture;
 
 void main() {
-	outColor = texture(tex, passTexCoord);
+	if (isTexture == 1) outColor = texture(tex, passTexCoord);
+	else outColor = passColor;
 }

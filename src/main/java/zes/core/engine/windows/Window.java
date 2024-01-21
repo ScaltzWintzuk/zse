@@ -1,5 +1,6 @@
 package zes.core.engine.windows;
 
+import java.io.FileNotFoundException;
 import java.nio.IntBuffer;
 
 import org.joml.Vector3f;
@@ -21,6 +22,7 @@ import zes.core.engine.graphics.Shader;
 import zes.core.engine.shapes.Rectangle;
 import zes.core.engine.textures.GlobalTextures;
 import zes.core.engine.textures.TextureSystem;
+import zes.core.engine.utils.Constants;
 import zes.core.engine.utils.ZColors;
 import zes.core.engine.utils.ZStack;
 
@@ -53,9 +55,9 @@ public class Window {
 	private long time;
 	
 	// TEMPORARY MOVE THIS TO A BETTER LOOP LATER!
-	private TextureSystem textureSystem;
+	private TextureSystem textureSystem = TextureSystem.getInstance();
 	
-	public Window() {
+	public Window() throws FileNotFoundException {
 		this("Game", 1920, 1080);
 	}
 	
@@ -64,23 +66,24 @@ public class Window {
 		//this(titleIn, );
 	}
 	
-	public Window(int widthIn, int heightIn) {
+	public Window(int widthIn, int heightIn) throws FileNotFoundException {
 		this("Game", widthIn, heightIn);
 	}
 	
-	public Window(String titleIn, int widthIn, int heightIn) {
+	public Window(String titleIn, int widthIn, int heightIn) throws FileNotFoundException {
 		title = titleIn;
 		width = widthIn;
 		height = heightIn;
+		
+		System.err.println("TEST");
+		//GlobalTextures.registerTextures(textureSystem);
 		
 		//screen = new Screen();
 		screens = new ZStack<Screen>();
 		screens.push(new Screen());
 		
-		shader = new Shader("resources/vertex.glsl", "resources/fragments.glsl");
-		
-		textureSystem = new TextureSystem();
-		GlobalTextures.registerTextures(textureSystem);
+		shader = new Shader(Constants.VERTEX_FILE_PATH, Constants.FRAGMENT_FILE_PATH);
+		shader.create();
 		
 		//shader = new Shader(Constants.VERTEX_FILE_PATH, Constants.FRAGMENT_FILE_PATH);
 		
